@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: 1.1 onboarding API
+  description: STD22025
+  version: 1.0.0
+servers:
+  - url: 'https://STD22025.com'
+paths:
+  /student:
+    get:
+      summary: Get student data
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Add a new student
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewStudent'
+      responses:
+        '200':
+          description: Student added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Student:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        std:
+          type: string
+    NewStudent:
+      type: object
+      properties:
+        name:
+          type: string
+        std:
+          type: string
