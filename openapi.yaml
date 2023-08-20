@@ -9,6 +9,8 @@ paths:
   /student:
     get:
       summary: Get student data
+      tags:
+        - Students
       responses:
         '200':
           description: Successful response
@@ -26,6 +28,8 @@ paths:
                 type: string
     post:
       summary: Add a new student
+      tags:
+        - Students
       requestBody:
         required: true
         content:
@@ -39,6 +43,98 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /student/{studentId}:
+    put:
+      summary: Update a student's information
+      tags:
+        - Students
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewStudent'
+      responses:
+        '200':
+          description: Student updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete a student
+      tags:
+        - Students
+      parameters:
+        - name: studentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Student deleted successfully
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /teacher:
+    get:
+      summary: Get teacher data
+      tags:
+        - Teachers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Teacher'
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Add a new teacher
+      tags:
+        - Teachers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewTeacher'
+      responses:
+        '200':
+          description: Teacher added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
         '500':
           description: Internal Server Error
           content:
@@ -63,3 +159,41 @@ components:
           type: string
         std:
           type: string
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        courses:
+          type: array
+          items:
+            type: object
+            properties:
+              courseName:
+                type: string
+              courseCode:
+                type: string
+              courseDuration:
+                type: string
+    NewTeacher:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        courses:
+          type: array
+          items:
+            type: object
+            properties:
+              courseName:
+                type: string
+              courseCode:
+                type: string
+              courseDuration:
+                type: string
