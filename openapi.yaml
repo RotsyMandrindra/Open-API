@@ -152,13 +152,23 @@ components:
           type: string
         std:
           type: string
+        birthdate:
+          type: string
     NewStudent:
       type: object
       properties:
+        id:
+          type: integer
+          example: 1
         name:
           type: string
+          example: Randria
         std:
           type: string
+          example: std22001
+        birthdate:
+          type: string
+          example: 2003-02-14
     Teacher:
       type: object
       properties:
@@ -184,8 +194,10 @@ components:
       properties:
         firstName:
           type: string
+          example: Tokimahery
         lastName:
           type: string
+          example: RAMAROZAKA
         courses:
           type: array
           items:
@@ -193,7 +205,10 @@ components:
             properties:
               courseName:
                 type: string
+                example: Algorithmique
               courseCode:
                 type: string
+                example: PROG1
               courseDuration:
                 type: string
+                example: 60h
